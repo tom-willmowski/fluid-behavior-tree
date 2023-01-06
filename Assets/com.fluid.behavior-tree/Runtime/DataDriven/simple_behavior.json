@@ -1,0 +1,12 @@
+{
+	"id": "simple_behavior_tree",
+	"nodes":
+	[
+		{"selector": {"name": "root selector"}},
+			{"sequence": {}},
+				{"condition_node": {"condition": true}},
+				{"splice": {"id": "log_behavior"}},
+			{"end": {}},
+		{"end": {}}
+	]
+}

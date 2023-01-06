@@ -1,0 +1,7 @@
+{
+	"id": "log_behavior",
+	"nodes":
+	[
+        {"log_node": {"message": "I'm inner behavior tree"}}
+    ]
+}
