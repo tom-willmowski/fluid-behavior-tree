@@ -4,7 +4,7 @@
 	[
 		{"selector": {"name": "root selector"}},
 			{"sequence": {}},
-				{"condition_node": {"condition": true}},
+				{"equals": {"key": "phase", "intValue": 1}},
 				{"splice": {"id": "log_behavior"}},
 			{"end": {}},
 		{"end": {}}

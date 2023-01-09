@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using CleverCrow.Fluid.BTs.DataDriven;
 using CleverCrow.Fluid.BTs.Trees;
 using Newtonsoft.Json;
@@ -11,8 +12,12 @@ public class DataDrivenTester : MonoBehaviour
 
     private JsonSerializerSettings settings = new() { ContractResolver = new NodeContractResolver() };
 
-    private void Awake()
+    private Blackboard blackboard;
+
+    private async void Awake()
     {
+        blackboard = new Blackboard();
+
         var registry = new DataDrivenBehaviorTreeRegistry();
         var behavior = JsonConvert.DeserializeObject<BehaviorTreeNode>(behaviorJson.text, settings);
         var dependentBehavior = JsonConvert.DeserializeObject<BehaviorTreeNode>(dependentBehaviorJson.text, settings);
@@ -20,7 +25,10 @@ public class DataDrivenTester : MonoBehaviour
         registry.Add(behavior);
         registry.Add(dependentBehavior);
 
-        tree = DataDrivenBehaviorTreeBuilder.Build(dependentBehavior, registry, new Blackboard(), gameObject);
+        tree = DataDrivenBehaviorTreeBuilder.Build(dependentBehavior, registry, blackboard, gameObject);
+        blackboard.Add("phase", 0);
+        await Task.Delay(3000);
+        blackboard.Change("phase", 1);
     }
 
     private void Update()
